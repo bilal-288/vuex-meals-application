@@ -4,7 +4,7 @@ import GuestLayout from '../components/GuestLayout.vue'
 import MealsByIngredient from '../views/MealsByIngredient.vue'
 import MealsByLetter from '../views/MealsByLetter.vue'
 import MealsByName from '../views/MealsByName.vue'
-
+import MealDetails from '../views/MealDetails.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [{
@@ -29,6 +29,11 @@ const routes = [{
                 name: 'byIngredient',
                 component: MealsByIngredient,
                 path: "/by-ingredient/:ingredient?"
+            },
+            {
+                path: '/meal/:id',
+                name: 'mealDetails',
+                component: MealDetails
             }
 
         ]

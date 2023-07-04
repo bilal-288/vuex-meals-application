@@ -15,7 +15,7 @@
       :key="meal.idMeal"
       class="bg-white shadow rounded-xl"
     >
-      <router-link to="/" >
+      <router-link :to="{name:'mealDetails', params:{id:meal.idMeal}}" >
         <img
         :src="meal.strMealThumb"
         :alt="strMeal"
@@ -30,7 +30,7 @@
           palette of oranges, pinks, and purples, creating a breathtaking scene
         </p>
         <div class="flex items-center justify-between">
-          <a :href="meal.strYoutube" target="_blank" class="px-3 py-2 rounded border-2 text-white bg-red-500 hover:bg-red-600 hover:text-white ">Youtube</a>
+         <YouTubeButton  :href="meal.strYoutube"/>
         </div>
       </div>
     </div>
@@ -40,14 +40,22 @@
 <script setup>
     import {
         computed,
+        onMounted,
         ref
     } from "vue";
 
     import store from "../store";
+    import YouTubeButton from "../components/YouTubeButton.vue"
+
+    import {
+        useRoute
+    } from 'vue-router'
+
     const keyword = ref("");
 
     //state represents the data of your application.
     const meals = computed(() => store.state.searchedMeals);
+    const route = useRoute();
 
     function searchMeals() {
         // action contain logic to perform tasks like making API requests
@@ -55,4 +63,11 @@
         // searchMeals is in action.js
         store.dispatch("searchMeals", keyword.value);
     }
+
+    onMounted(() => {
+        keyword.value = route.params.name;
+        if (keyword.value) {
+            searchMeals();
+        }
+    })
 </script>
