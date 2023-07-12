@@ -70,7 +70,6 @@
             .then(({
                 data
             }) => {
-                debugger;
                 meal.value = data.meals[0] || {}
             })
     })
