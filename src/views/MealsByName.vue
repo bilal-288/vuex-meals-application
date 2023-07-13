@@ -36,7 +36,12 @@
         // action contain logic to perform tasks like making API requests
         // commit mutations to update the state
         // searchMeals is in action.js
-        store.dispatch("searchMeals", keyword.value);
+        if (keyword.value) {
+            store.dispatch("searchMeals", keyword.value);
+        } else {
+            store.commit("setSearchedMeals", []);
+        }
+
     }
 
     onMounted(() => {
